@@ -43,20 +43,3 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
-
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var button = document.querySelector('#beratung');
-    var target = document.querySelector('#include'); // Corrected ID
-    
-    // Ensure the button and target element exist
-    if(button && target) {
-      // Append the button to the target element
-      target.appendChild(button);
-      
-      // Optional: Apply styles to position the button to the extreme right
-      button.style.marginLeft = 'auto';
-    }
-  });
