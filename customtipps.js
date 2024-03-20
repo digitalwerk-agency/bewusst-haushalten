@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const articles = document.querySelectorAll("#article-rt *"); // Select all children of #article-rt
+   const articles = document.querySelectorAll(".text-rich-text *"); // Select all children of elements with the class .text-rich-text
 
     for (let i = 0; i < articles.length; i++) {
         const element = articles[i];
