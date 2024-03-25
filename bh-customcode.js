@@ -170,8 +170,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 window.addEventListener('load', function() {
     var scrollContainer = document.querySelector('.padding-global.is-navsub');
-    // Updated to reflect that we're targeting an element with both 'nav-item' and 'w--current' classes within '.padding-global.is-navsub'
-    var currentItem = scrollContainer.querySelector('.nav-item.w--current');
+    // Now targeting an element with both 'nav-item' and 'c--current' classes within '.padding-global.is-navsub'
+    var currentItem = scrollContainer.querySelector('.nav-item.c--current');
 
     if (scrollContainer && currentItem) {
         var scrollPosition = currentItem.offsetLeft - scrollContainer.offsetLeft;
