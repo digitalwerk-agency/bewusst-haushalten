@@ -138,7 +138,18 @@ document.addEventListener('DOMContentLoaded', function() {
         table.querySelectorAll('tbody tr').forEach(function(tr) {
             tr.querySelectorAll('td').forEach(function(td, index) {
                 td.setAttribute('data-label', headers[index]);
+                const label = document.createElement('div');
+                label.style.position = 'absolute';
+                label.style.visibility = 'hidden';
+                label.style.height = 'auto';
+                label.style.width = 'auto';
+                label.textContent = headers[index];
+                document.body.appendChild(label);
+                const labelHeight = label.offsetHeight;
+                document.body.removeChild(label);
+                td.style.paddingTop = (labelHeight + 20) + 'px';
             });
         });
     });
 });
+
