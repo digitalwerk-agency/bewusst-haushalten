@@ -132,24 +132,30 @@ document.addEventListener('DOMContentLoaded', function() {
     var tables = document.querySelectorAll('table');
     tables.forEach(function(table) {
         var headers = [];
-        table.querySelectorAll('thead th').forEach(function(th, index) {
-            headers[index] = th.textContent;
-        });
-        table.querySelectorAll('tbody tr').forEach(function(tr) {
-            tr.querySelectorAll('td').forEach(function(td, index) {
-                td.setAttribute('data-label', headers[index]);
-                const label = document.createElement('div');
-                label.style.position = 'absolute';
-                label.style.visibility = 'hidden';
-                label.style.height = 'auto';
-                label.style.width = 'auto';
-                label.textContent = headers[index];
-                document.body.appendChild(label);
-                const labelHeight = label.offsetHeight;
-                document.body.removeChild(label);
-                td.style.paddingTop = (labelHeight + 20) + 'px';
+        var headerCells = table.querySelectorAll('thead th');
+        if (headerCells.length > 0) {  // Check if thead exists and has th elements
+            headerCells.forEach(function(th, index) {
+                headers[index] = th.textContent;
             });
-        });
+            table.querySelectorAll('tbody tr').forEach(function(tr) {
+                tr.querySelectorAll('td').forEach(function(td, index) {
+                    if (headers[index]) {  // Check if a corresponding header exists
+                        td.setAttribute('data-label', headers[index]);
+                        const label = document.createElement('div');
+                        label.style.position = 'absolute';
+                        label.style.visibility = 'hidden';
+                        label.style.height = 'auto';
+                        label.style.width = 'auto';
+                        label.textContent = headers[index];
+                        document.body.appendChild(label);
+                        const labelHeight = label.offsetHeight;
+                        document.body.removeChild(label);
+                        td.style.paddingTop = (labelHeight + 20) + 'px';
+                    }
+                });
+            });
+        }
     });
 });
+
 
