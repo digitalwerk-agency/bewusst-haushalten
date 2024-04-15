@@ -116,21 +116,41 @@ quizSwiper.on('slideChange', function () {
   }
 });
 
-// !SECTION Generate PDF
 document.querySelector('.quiz-end-button').addEventListener('click', function () {
-  const elementToPrint = quizSlides[quizSlides.length - 1];
+  // Example: Ensure Google Fonts are loaded (adjust according to your fonts)
+  if (document.fonts) {
+    document.fonts.ready.then(function () {
+      console.log('Fonts ready');
+      captureQuizResults();
+    });
+  } else {
+    // Fallback if Font Loading API is not supported
+    captureQuizResults();
+  }
+});
 
-  const pageBody = document.querySelector('body');
+ // PDF DOWNLOAD
 
-  const clonedLastSlide = elementToPrint.cloneNode(true); // Changed 'deep' to true for correct cloning
-
-  // Add special class to cloned node
-  clonedLastSlide.classList.add('cloned-quiz-result');
-
-  pageBody.appendChild(clonedLastSlide);
-
-  window.print();
-
-  // Remove cloned quiz result after printing
-  clonedLastSlide.remove();
+document.querySelector('.quiz-end-button').addEventListener('click', function () {
+var node = document.querySelector('.swiper-slide-active');
+      
+  htmlToImage.toPng(node, {
+    style: { background: "white"},
+    pixelRatio: 1
+  })
+    .then(function (dataUrl) {
+    //download(dataUrl, 'bewusst-haushalten-ergebnis.png');
+    var img = new Image(); 
+    img.onload = function(){
+        const imgWidth = img.width;
+        const imgHeight = img.height + 40;
+      const pdf = new jsPDF("p", "pt", [imgWidth,imgHeight]);
+      pdf.addImage(dataUrl, 'PNG',0,0);
+      pdf.save('bewusst-haushalten-checkliste.pdf');
+    };
+    img.src = dataUrl;
+  })
+    .catch(function (error) {
+    console.error('Es ist ein Fehler aufgetreten', error);
+  });
 });
