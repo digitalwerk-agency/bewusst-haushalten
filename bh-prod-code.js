@@ -150,7 +150,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         document.body.appendChild(label);
                         const labelHeight = label.offsetHeight;
                         document.body.removeChild(label);
-                        td.style.paddingTop = (labelHeight + 20) + 'px';
                     }
                 });
             });
