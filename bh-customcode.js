@@ -128,26 +128,6 @@ window.addEventListener('load', function() {
     }
 });
 
-function addSoftHyphens(text) {
-    var hyphenatedText = text.replace(/([a-zäöüß]{5})([a-zäöüß]+)/gi, '$1&shy;$2');
-    return hyphenatedText;
-}
-
-function applyHyphenation() {
-    var elements = document.querySelectorAll('h1, h2, .heading-style-h1, .heading-style-h2');
-
-    elements.forEach(element => {
-        var addHyphens = element.getAttribute('data-add-hyphens');
-        if (addHyphens !== "false") {
-            element.innerHTML = addSoftHyphens(element.innerHTML);
-        }
-    });
-}
-
-if (window.innerWidth <= 768) {
-    document.addEventListener("DOMContentLoaded", applyHyphenation);
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     var tables = document.querySelectorAll('table');
     tables.forEach(function(table) {
