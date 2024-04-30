@@ -129,8 +129,7 @@ document.querySelector('.quiz-end-button').addEventListener('click', function ()
   }
 });
 
- // PDF DOWNLOAD
-
+// PDF DOWNLOAD
 document.querySelector('.quiz-end-button').addEventListener('click', function () {
 var node = document.querySelector('.swiper-slide-active');
       
@@ -139,10 +138,12 @@ var node = document.querySelector('.swiper-slide-active');
     pixelRatio: 1
   })
     .then(function (dataUrl) {
-    //download(dataUrl, 'bewusst-haushalten-ergebnis.png');
-    var img = new Image(); 
+    var img = new Image();
+    var imgSpace = 80;
     img.onload = function(){
-        const imgWidth = img.width;
+    		if($(window).width() < 800) imgSpace = 0;
+        console.log("space: "+imgSpace);
+        const imgWidth = img.width + imgSpace;
         const imgHeight = img.height + 40;
       const pdf = new jsPDF("p", "pt", [imgWidth,imgHeight]);
       pdf.addImage(dataUrl, 'PNG',0,0);
